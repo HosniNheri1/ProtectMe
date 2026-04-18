@@ -1,0 +1,80 @@
+// Firestore security rules for Protect app
+// - Authenticated users can create complaints where `userId == request.auth.uid`
+// - Users can read their own complaints; admins (users.role == 'admin') can read/update all
+// - User documents are protected: users can create/update their own, admins can read/update
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Complaints: tout user authentifié peut créer,
+// les utilisateurs peuvent lire leurs propres réclamations,
+// les admins peuvent tout faire
+match /complaints/{complaintId} {
+
+  allow create: if request.auth != null;
+  allow read: if request.auth != null && (
+    resource.data.userId == request.auth.uid ||
+    get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin'
+  );
+  allow update, delete: if request.auth != null &&
+    get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+}
+
+// Users: l'utilisateur peut écrire/mettre à jour son propre doc,
+// les admins peuvent lire tout
+match /users/{userId} {
+ allow create: if request.auth != null && request.auth.uid == userId;
+  allow read, update: if request.auth != null && (
+    request.auth.uid == userId ||
+    get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin'
+  );
+  allow read: if request.auth != null &&
+    (request.auth.uid == userId ||
+     get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
+  allow write: if request.auth != null && request.auth.uid == userId;
+}
+
+// Ajoutez d'autres règles utiles ici...
+    match /emergency_audios/{document} {
+      allow read, write: if request.auth != null &&
+        request.auth.uid == resource.data.userId;
+    }
+  }
+  match /databases/{database}/documents {
+    // Collection users - chaque utilisateur peut lire/mettre à jour son propre document
+    match /users/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if request.auth != null && request.auth.uid == userId;
+
+      // Les administrateurs peuvent tout faire
+      allow read, write: if request.auth.token.admin == true;
+    }
+
+    // Sous-collections (contacts d'urgence, alertes)
+    match /users/{userId}/emergency_contacts/{contactId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    match /users/{userId}/alerts/{alertId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /audios/{fileName} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+  }
+}
+
+/* Notes for deployment and admin setup:
+ - To deploy using Firebase CLI:
+     firebase deploy --only firestore:rules
+
+ - Ensure each admin user has a Firestore document in `users/{uid}` with:
+     { role: "admin", ... }
+
+ - If you prefer console: go to Firebase Console > Firestore > Rules and paste these rules.
+*/

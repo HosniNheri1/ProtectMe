@@ -1,0 +1,7 @@
+{
+  "emulators": {
+    "storage": {
+      "port": 9199
+    }
+  }
+}

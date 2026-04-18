@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "827300633323",
+    "project_id": "protectme-78834",
+    "storage_bucket": "protectme-78834.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827300633323:android:9e12e3f7b73254c554bcae",
+        "android_client_info": {
+          "package_name": "com.example.protect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "827300633323-fbqvc3bn8q2fr8seamaotq20rt1n9q5f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjQTcCa7Fy9oldtrsobE0INoamLNtjT60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "827300633323-fbqvc3bn8q2fr8seamaotq20rt1n9q5f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "827300633323-rv28cc1ts103kpgb3c1tjptk8sgnq9p8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.protect"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
