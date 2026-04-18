@@ -18,13 +18,7 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         
-        <!-- Pour Android 11+ -->
-        <queries>
-            <intent>
-                <action android:name="android.intent.action.VIEW" />
-                <data android:scheme="sms" />
-            </intent>
-        </queries>
+       
         
         <activity
             android:name=".MainActivity"
@@ -49,4 +43,15 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+     <!-- Pour Android 11+ -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="sms" />
+        </intent>
+    </queries>
 </manifest>
