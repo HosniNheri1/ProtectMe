@@ -1,0 +1,43 @@
+name: Build Flutter APK
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Find APK location
+        id: find_apk
+        run: |
+          APK_PATH=$(find build -name "*.apk" | head -n 1)
+          echo "APK_PATH=$APK_PATH" >> $GITHUB_OUTPUT
+          echo "APK found at: $APK_PATH"
+
+      - name: Upload APK
+        if: steps.find_apk.outputs.APK_PATH != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-apk
+          path: ${{ steps.find_apk.outputs.APK_PATH }}
