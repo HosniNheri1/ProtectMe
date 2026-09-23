@@ -121,12 +121,15 @@ Auteur : Hosni Nheri
 
 GitHub : HosniNheri1
 
+Projet : https://github.com/HosniNheri1/ProtectMe
+
+ProtectMe – Votre compagnon de sécurité intelligent.
 📄 Licence
 
 Ce projet est distribué sous la licence MIT.
 Vous pouvez librement utiliser, modifier et distribuer ce code à des fins personnelles ou commerciales, sous réserve de conserver la mention de l’auteur original.
 
-text
+Text
 MIT License
 
 Copyright (c) 2025 Hosni Nheri
@@ -148,8 +151,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-
-Projet : https://github.com/HosniNheri1/ProtectMe
-
-ProtectMe – Votre compagnon de sécurité intelligent.
