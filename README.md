@@ -45,7 +45,7 @@
 |----------------|----------------------|-------------|
 | ![Home](screenshots/home.png) | ![Contacts](screenshots/contacts.png) | ![Settings](screenshots/settings.png) |
 
-*(Ajoutez ici vos propres captures dans le dossier `screenshots/`)*
+
 
 ---
 
