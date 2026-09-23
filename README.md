@@ -7,7 +7,7 @@
 
 **ProtectMe** est une application mobile (Android) et web conçue pour assister les personnes isolées ou âgées en cas de situation d’urgence. Elle combine un **bouton SOS manuel** et une **surveillance automatique intelligente** (détection de chute, d’inactivité prolongée et de perte de réseau). Les alertes sont envoyées aux contacts d’urgence via **WhatsApp** (sur le web) ou **SMS** (sur mobile).
 
-![Aperçu de l'application](screenshots/home_screen.png)
+![Aperçu de l'application](screenshots/app-preview.png)
 
 ---
 
@@ -45,7 +45,7 @@
 |----------------|----------------------|-------------|
 | ![Home](screenshots/home.png) | ![Contacts](screenshots/contacts.png) | ![Settings](screenshots/settings.png) |
 
-*(Ajoutez ici vos propres captures dans le dossier `screenshots/`)*
+
 
 ---
 
