@@ -23,21 +23,26 @@ subprojects {
     project.evaluationDependsOn(":app")
 }
 
-// Force a consistent JVM target (17) across every subproject, including
-// third-party plugins (e.g. tflite_flutter) that hardcode an older Java
-// target than Kotlin's default. Runs in afterEvaluate so it overrides
-// whatever the plugin's own build.gradle set.
+// Force a consistent JVM target (17) across every Android/Kotlin subproject,
+// including third-party plugins (e.g. tflite_flutter) that hardcode an older
+// Java target than Kotlin's default.
 subprojects {
-    afterEvaluate {
-        extensions.findByType(BaseExtension::class.java)?.apply {
-            compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_17
-                targetCompatibility = JavaVersion.VERSION_17
-            }
+    pluginManager.withPlugin("com.android.application") {
+        extensions.findByType(BaseExtension::class.java)?.compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
         }
-        tasks.withType<KotlinCompile>().configureEach {
-            compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
+    }
+
+    pluginManager.withPlugin("com.android.library") {
+        extensions.findByType(BaseExtension::class.java)?.compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
         }
+    }
+
+    tasks.withType<KotlinCompile>().configureEach {
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
     }
 }
 
